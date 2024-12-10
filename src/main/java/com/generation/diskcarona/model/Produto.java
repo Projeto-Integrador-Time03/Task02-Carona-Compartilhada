@@ -1,21 +1,15 @@
 package com.generation.diskcarona.model;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-//import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_produtos")
@@ -24,14 +18,11 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "O atributo origem é obrigatório")
 	private String origem;
 
-	@NotBlank(message = "O atributo destino é obrigatório")
 	private String destino;
 
-	@UpdateTimestamp
-	private LocalDateTime data;
+	private float quilometragem;
 
 	private float valor;
 
@@ -67,12 +58,12 @@ public class Produto {
 		this.destino = destino;
 	}
 
-	public LocalDateTime getData() {
-		return data;
+	public float getQuilometragem() {
+		return quilometragem;
 	}
 
-	public void setData(LocalDateTime data) {
-		this.data = data;
+	public void setQuilometragem(float quilometragem) {
+		this.quilometragem = quilometragem;
 	}
 
 	public float getValor() {
