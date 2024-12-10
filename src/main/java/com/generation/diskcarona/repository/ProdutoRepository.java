@@ -1,5 +1,6 @@
 package com.generation.diskcarona.repository;
 
-public interface UsuarioRepository {
+public class ProdutoRepository {
+
 
 }
