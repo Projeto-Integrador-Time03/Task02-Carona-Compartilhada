@@ -10,11 +10,11 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull(message = "O atributo descrição é obrigatório")
 	private String descricao;
 
@@ -33,10 +33,5 @@ public class Categoria {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
-	
-	
-	
 
 }
