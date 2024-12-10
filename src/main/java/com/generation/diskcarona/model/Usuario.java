@@ -40,7 +40,7 @@ public class Usuario {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
-	private List<Produto> produto;
+	private List<Viagem> produto;
 
 	public Long getId() {
 		return id;

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.generation.diskcarona.model.Produto;
-import com.generation.diskcarona.repository.ProdutoRepository;
+import com.generation.diskcarona.model.Viagem;
+import com.generation.diskcarona.repository.ViagemRepository;
 import com.generation.diskcarona.service.CalcTempoViagem;
 
 import jakarta.validation.Valid;
@@ -27,31 +27,31 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ProdutoController {
+public class ViagemController {
 
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ViagemRepository viagemRepository;
 
 	@Autowired
 	private CalcTempoViagem calcTempoViagem;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> getAll() {
-		return ResponseEntity.ok(produtoRepository.findAll());
+	public ResponseEntity<List<Viagem>> getAll() {
+		return ResponseEntity.ok(viagemRepository.findAll());
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> getById(@PathVariable Long id) {
-		return produtoRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
+	public ResponseEntity<Viagem> getById(@PathVariable Long id) {
+		return viagemRepository.findById(id).map(resposta -> ResponseEntity.ok(resposta))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@GetMapping("/tempo-viagem/{id}/{velo}")
 	public ResponseEntity<String> calcularTempoDeViagem(@PathVariable Long id, @PathVariable float velo) {
 
-		Optional<Produto> produto = produtoRepository.findById(id);
+		Optional<Viagem> viagem = viagemRepository.findById(id);
 
-		Float tempoViagem = calcTempoViagem.calcTempoViagem(produto, velo);
+		Float tempoViagem = calcTempoViagem.calcTempoViagem(viagem, velo);
 
 		if (tempoViagem == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -62,26 +62,26 @@ public class ProdutoController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Produto> post(@Valid @RequestBody Produto produto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto));
+	public ResponseEntity<Viagem> post(@Valid @RequestBody Viagem produto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(viagemRepository.save(produto));
 	}
 
 	@PutMapping
-	public ResponseEntity<Produto> put(@Valid @RequestBody Produto produto) {
-		return produtoRepository.findById(produto.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(produtoRepository.save(produto)))
+	public ResponseEntity<Viagem> put(@Valid @RequestBody Viagem produto) {
+		return viagemRepository.findById(produto.getId())
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(viagemRepository.save(produto)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
-		Optional<Produto> categoria = produtoRepository.findById(id);
+		Optional<Viagem> categoria = viagemRepository.findById(id);
 
 		if (categoria.isEmpty())
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-		produtoRepository.deleteById(id);
+		viagemRepository.deleteById(id);
 	}
 
 }

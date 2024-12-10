@@ -3,9 +3,9 @@ package com.generation.diskcarona.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.generation.diskcarona.model.Produto;
+import com.generation.diskcarona.model.Viagem;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+public interface ViagemRepository extends JpaRepository<Viagem, Long> {
 
 }

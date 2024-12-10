@@ -5,22 +5,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.generation.diskcarona.model.Produto;
-import com.generation.diskcarona.repository.ProdutoRepository;
+import com.generation.diskcarona.model.Viagem;
+import com.generation.diskcarona.repository.ViagemRepository;
 
 @Service
 public class CalcTempoViagem {
 
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private ViagemRepository viagemRepository;
 
-	public Float calcTempoViagem(Optional<Produto> produto, float velo) {
+	public Float calcTempoViagem(Optional<Viagem> viagem, float velo) {
 
-		if (produtoRepository.findById(produto.get().getId()).isPresent()) {
+		if (viagemRepository.findById(viagem.get().getId()).isPresent()) {
 
 			float tempoTotal;
 
-			tempoTotal = (produto.get().getQuilometragem() / velo) * 60;
+			tempoTotal = (viagem.get().getQuilometragem() / velo) * 60;
 
 			return Math.round(tempoTotal * 100) / 100.0f; 
 
