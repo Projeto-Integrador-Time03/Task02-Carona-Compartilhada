@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.diskcarona.model.Viagem;
 import com.generation.diskcarona.repository.ViagemRepository;
-import com.generation.diskcarona.service.CalcTempoViagem;
+import com.generation.diskcarona.service.ViagemService;
 
 import jakarta.validation.Valid;
 
@@ -33,7 +33,7 @@ public class ViagemController {
 	private ViagemRepository viagemRepository;
 
 	@Autowired
-	private CalcTempoViagem calcTempoViagem;
+	private ViagemService viagemService;
 
 	@GetMapping
 	public ResponseEntity<List<Viagem>> getAll() {
@@ -51,7 +51,7 @@ public class ViagemController {
 
 		Optional<Viagem> viagem = viagemRepository.findById(id);
 
-		Float tempoViagem = calcTempoViagem.calcTempoViagem(viagem, velo);
+		Float tempoViagem = viagemService.calcTempoViagem(viagem, velo);
 
 		if (tempoViagem == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -9,7 +9,7 @@ import com.generation.diskcarona.model.Viagem;
 import com.generation.diskcarona.repository.ViagemRepository;
 
 @Service
-public class CalcTempoViagem {
+public class ViagemService {
 
 	@Autowired
 	private ViagemRepository viagemRepository;
