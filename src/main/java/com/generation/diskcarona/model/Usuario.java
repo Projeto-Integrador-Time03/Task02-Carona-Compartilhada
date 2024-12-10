@@ -82,6 +82,7 @@ public class Usuario {
 		this.foto = foto;
 	}
 
+
 	public List<Viagem> getViagem() {
 		return viagem;
 	}
@@ -89,5 +90,6 @@ public class Usuario {
 	public void setViagem(List<Viagem> viagem) {
 		this.viagem = viagem;
 	}
+
 
 }
