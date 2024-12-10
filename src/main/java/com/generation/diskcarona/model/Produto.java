@@ -4,16 +4,18 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 //import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-
 
 @Entity
 @Table(name = "tb_produtos")
@@ -33,9 +35,13 @@ public class Produto {
 
 	private float valor;
 
-	// @ManyToOne
-	// @JsonIgnoreProperties("produto")
-	private Produto produto;
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
+
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
 
 	public Long getId() {
 		return id;
@@ -77,12 +83,20 @@ public class Produto {
 		this.valor = valor;
 	}
 
-	public Produto getProduto() {
-		return produto;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }
