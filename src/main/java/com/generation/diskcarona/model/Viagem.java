@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+
 @Entity
 @Table(name = "tb_viagem")
 public class Viagem {
@@ -25,11 +26,11 @@ public class Viagem {
 	private float valor;
 
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("viagem")
 	private Usuario usuario;
 
 	@ManyToOne
-	@JsonIgnoreProperties("produto")
+	@JsonIgnoreProperties("viagem")
 	private Categoria categoria;
 
 	public Long getId() {
