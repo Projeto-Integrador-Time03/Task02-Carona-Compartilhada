@@ -14,15 +14,23 @@ public class ViagemService {
 	@Autowired
 	private ViagemRepository viagemRepository;
 
-	public Float calcTempoViagem(Optional<Viagem> viagem, float velo) {
+	public String calcTempoViagem(Optional<Viagem> viagem, float velo) {
 
 		if (viagemRepository.findById(viagem.get().getId()).isPresent()) {
 
 			float tempoTotal;
+			String menssagem;
 
 			tempoTotal = (viagem.get().getQuilometragem() / velo) * 60;
 
-			return Math.round(tempoTotal * 100) / 100.0f; 
+			int horas = (int) (tempoTotal / 60);
+			int minutos = (int) ((tempoTotal % 60));
+
+			if (horas > 0)
+				menssagem = ("Tempo estimado: " + horas + " horas e " + minutos + " minutos");
+			else
+				menssagem = ("Tempo estimado: " + minutos + " minutos");
+			return menssagem;
 
 		}
 		return null;
