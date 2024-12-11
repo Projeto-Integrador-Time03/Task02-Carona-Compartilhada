@@ -14,12 +14,14 @@ public class ViagemService {
 	@Autowired
 	private ViagemRepository viagemRepository;
 
-	public String calcTempoViagem(Optional<Viagem> viagem, float velo) {
+	public String calcTempoViagem(Long id, float velo) {
 
-		if (viagemRepository.findById(viagem.get().getId()).isPresent()) {
+		Optional<Viagem> viagem = viagemRepository.findById(id);
+		String menssagem;
+
+		if (viagem.isPresent()) {
 
 			float tempoTotal;
-			String menssagem;
 
 			tempoTotal = (viagem.get().getQuilometragem() / velo) * 60;
 
@@ -32,8 +34,9 @@ public class ViagemService {
 				menssagem = ("Tempo estimado: " + minutos + " minutos");
 			return menssagem;
 
+		} else {
+			return menssagem = "Não foi possível encontrar a viagem";
 		}
-		return null;
 
 	}
 }

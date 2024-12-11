@@ -49,16 +49,7 @@ public class ViagemController {
 
 	@GetMapping("/tempo-viagem/{id}/{velo}")
 	public ResponseEntity<String> calcularTempoDeViagem(@PathVariable Long id, @PathVariable float velo) {
-
-		Optional<Viagem> viagem = viagemRepository.findById(id);
-
-		String menssagem = viagemService.calcTempoViagem(viagem, velo);
-
-		if (menssagem == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-		}
-
-		return ResponseEntity.ok(menssagem);
+		return ResponseEntity.ok(viagemService.calcTempoViagem(id, velo));
 	}
 
 	@PostMapping

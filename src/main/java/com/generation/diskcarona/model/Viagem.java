@@ -8,7 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_viagem")
@@ -17,12 +18,16 @@ public class Viagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank (message = "A origem é obrigatória")
 	private String origem;
 
+	@NotBlank (message = "O destino é obrigatória")
 	private String destino;
 
+	@NotNull (message = "A quilometragem é obrigatória")
 	private float quilometragem;
 
+	@NotNull (message = "o valor é obrigatória")
 	private float valor;
 
 	@ManyToOne
