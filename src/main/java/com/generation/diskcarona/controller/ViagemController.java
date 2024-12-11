@@ -34,7 +34,6 @@ public class ViagemController {
 	private ViagemRepository viagemRepository;
 
 	@Autowired
-
 	private ViagemService viagemService;
 
 	@GetMapping
@@ -54,14 +53,14 @@ public class ViagemController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Viagem> post(@Valid @RequestBody Viagem produto) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(viagemRepository.save(produto));
+	public ResponseEntity<Viagem> post(@Valid @RequestBody Viagem viagem) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(viagemRepository.save(viagem));
 	}
 
 	@PutMapping
-	public ResponseEntity<Viagem> put(@Valid @RequestBody Viagem produto) {
-		return viagemRepository.findById(produto.getId())
-				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(viagemRepository.save(produto)))
+	public ResponseEntity<Viagem> put(@Valid @RequestBody Viagem viagem) {
+		return viagemRepository.findById(viagem.getId())
+				.map(resposta -> ResponseEntity.status(HttpStatus.OK).body(viagemRepository.save(viagem)))
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 
