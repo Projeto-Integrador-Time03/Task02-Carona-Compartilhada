@@ -23,7 +23,6 @@ import com.generation.diskcarona.repository.ViagemRepository;
 
 import com.generation.diskcarona.service.ViagemService;
 
-
 import jakarta.validation.Valid;
 
 @RestController
@@ -54,16 +53,13 @@ public class ViagemController {
 
 		Optional<Viagem> viagem = viagemRepository.findById(id);
 
+		String menssagem = viagemService.calcTempoViagem(viagem, velo);
 
-		Float tempoViagem = viagemService.calcTempoViagem(viagem, velo);
-
-
-		if (tempoViagem == null) {
+		if (menssagem == null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 
-		String mensagem = "O tempo da viagem é de: " + tempoViagem + " min (" + tempoViagem / 60 + " hrs)";
-		return ResponseEntity.ok(mensagem);
+		return ResponseEntity.ok(menssagem);
 	}
 
 	@PostMapping
