@@ -20,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.generation.diskcarona.model.Viagem;
 import com.generation.diskcarona.repository.ViagemRepository;
-
 import com.generation.diskcarona.service.ViagemService;
 
 import jakarta.validation.Valid;
@@ -49,7 +48,8 @@ public class ViagemController {
 
 	@GetMapping("/tempo-viagem/{id}/{velo}")
 	public ResponseEntity<String> calcularTempoDeViagem(@PathVariable Long id, @PathVariable float velo) {
-		return ResponseEntity.ok(viagemService.calcTempoViagem(id, velo));
+		return viagemRepository.findById(id).map(viagem -> ResponseEntity.ok(viagemService.calcTempoViagem(viagem, velo)))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Viagem não encontrada"));
 	}
 
 	@PostMapping
